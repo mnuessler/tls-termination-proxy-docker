@@ -2,8 +2,10 @@
 
 set -e
 
-if [ ! -f "/cert.pem" ]; then
-    echo "Certificate file '/cert.pem' not found. Make sure it is mounted as a volume when starting the container."
+export CERT_PATH=${CERT_PATH:-"/cert.pem"}
+
+if [ ! -f $CERT_PATH ]; then
+    echo "Certificate file '$CERT_PATH' not found. Make sure it is mounted as a volume when starting the container."
     exit 1
 fi
 

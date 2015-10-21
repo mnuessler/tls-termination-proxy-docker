@@ -33,6 +33,26 @@ docker run \
     mnuessler/tls-termination-proxy
 ```
 
+### Kubernetes support
+
+When running this image on Kubernetes, the volume hosting the certificate has to be
+a directory (cannot be the file itself).
+The following command shows the alternative settings to support kubernetes volumes:
+
+```
+docker run \
+    -e HTTPS_UPSTREAM_SERVER_ADDRESS=othercontainer \
+    -e HTTPS_UPSTREAM_SERVER_PORT=80 \
+    -e CERT_PATH=/certs/cert.pem
+    -v /path/to/certs/:/certs/:ro \
+    --link othercontainer:othercontainer \
+    mnuessler/tls-termination-proxy
+```
+
+Notice that we need to configure `CERT_PATH` and make sure the volume points at the directory, not
+the cretificate file itself.
+If `CERT_PATH` is not configured, it will default to `/cert.pem`.
+
 ### Build the image
 
 ```
