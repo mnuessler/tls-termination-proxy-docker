@@ -30,6 +30,7 @@ location /cert.pem by the container.
 docker run \
     -e HTTPS_UPSTREAM_SERVER_ADDRESS=othercontainer \
     -e HTTPS_UPSTREAM_SERVER_PORT=80 \
+    -e TIMEOUT=15 \
     -v /path/to/cert.pem:/cert.pem:ro \
     --link othercontainer:othercontainer \
     mnuessler/tls-termination-proxy
@@ -45,14 +46,15 @@ The following command shows the alternative settings to support kubernetes volum
 docker run \
     -e HTTPS_UPSTREAM_SERVER_ADDRESS=othercontainer \
     -e HTTPS_UPSTREAM_SERVER_PORT=80 \
-    -e CERT_PATH=/certs/cert.pem
+    -e CERT_PATH=/certs/cert.pem \
+    -e TIMEOUT=15 \
     -v /path/to/certs/:/certs/:ro \
     --link othercontainer:othercontainer \
     mnuessler/tls-termination-proxy
 ```
 
-Notice that `CERT_PATH` has to be configures and the volume has to point to a directory, not
-the cretificate file itself.
+Notice that `CERT_PATH` has to be configured and the volume has to point to a directory, not
+the certificate file itself.
 If `CERT_PATH` is not configured, it will default to `/cert.pem`.
 
 ### Build the image
