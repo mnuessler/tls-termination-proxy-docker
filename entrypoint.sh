@@ -12,6 +12,7 @@ fi
 # Environmenat variables and defaults for the configuration
 export HTTPS_UPSTREAM_SERVER_ADDRESS=${HTTPS_UPSTREAM_SERVER_ADDRESS:-"upstream"}
 export HTTPS_UPSTREAM_SERVER_PORT=${HTTPS_UPSTREAM_SERVER_PORT:-80}
+export TIMEOUT=${TIMEOUT:-15}
 
 # Prepare configuration file
 config=/etc/pound/pound.cfg
